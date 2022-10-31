@@ -3,6 +3,9 @@
 ## Descripción
 Este es un carrito de compras hecho en React.
 
+## Demostración
+[![Alt text](https://img.youtube.com/vi/BiQh20bexJo/0.jpg)](https://www.youtube.com/watch?v=BiQh20bexJo)
+
 ## Librerías adicionales usadas
 >Todo el sitio web fue maquetado con **Boostrap**, se puso el cdn directamente en `index.html`, por lo que se hará mucho uso de las clases *className* y *style* en jsx para la maquetación.
 
