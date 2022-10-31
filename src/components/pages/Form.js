@@ -3,8 +3,10 @@ import { UsarContextos } from '../../utils/contexts/CartContext';
 
 function Form(){
 
+  //Hook para controlar el estado de formulario
   const [form, setForm] = useState({});
 
+  //Función para controlar los input text del formulario
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -12,6 +14,7 @@ function Form(){
     })
   }
 
+  //Función para controlar el input checkbox del formulario
   const handleChecked = (e) => {
     setForm({
       ...form,
@@ -19,6 +22,7 @@ function Form(){
     })
   }
 
+  //Se hace uso del contexto y se importa las funciones addOrders; además de las variables cantidad y precioFinal
   const { addOrders, cantidad, precioFinal } = UsarContextos();
 
   return(

@@ -3,6 +3,7 @@ import { UsarContextos } from '../../utils/contexts/CartContext'
 
 function Cart({props}){
   
+  //Se usa el contexto y se importa la función removeItem
   const { removeItem } = UsarContextos();
 
   return(

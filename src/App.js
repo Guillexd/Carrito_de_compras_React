@@ -10,10 +10,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+    //Controlador para la navegación
     <Router>
+      {/* Alcance del contexto provider*/}
       <ContextoTareas>
+        {/* Componente presentacional*/}
         <NavBar/>
-        <Routes>
+        <Routes> 
+          {/* Rutas para la navegación */}
           <Route exact path="/" element={<ItemListContainer/>} />
           <Route exact path="/categorias/:id" element={<ItemListContainer/>} />
           <Route exact path="/item/:id" element={<ItemDetailContainer/>} />

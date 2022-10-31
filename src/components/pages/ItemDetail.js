@@ -4,8 +4,10 @@ import ItemCount from './ItemCount';
 
 function ItemDetail({ product, id }){
  
+  //Se hace uso del contexto y se importa la función setCarrito; además de la variable carrito
   const { carrito, setCarrito} = UsarContextos();
 
+  //Función que agrega el producto (objeto) a la variable 'carrito' (array)
   const onAdd = (contador, e) => {
     if (carrito.some(obj=>obj.id==id)){
       const prod=carrito.findIndex(el=>el.id==product.idProd)
@@ -16,6 +18,7 @@ function ItemDetail({ product, id }){
         nombre: product.producto.nombre,
         id: id, 
         precio: product.producto.precio, 
+        stock: product.producto.stock,
         imag: product.producto.imagen,
         cantidad: contador
       }

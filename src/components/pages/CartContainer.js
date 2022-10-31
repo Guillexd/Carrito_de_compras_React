@@ -5,10 +5,13 @@ import { useNavigate} from 'react-router-dom';
 
 function CartContainer(){
 
+  //Se usa el contexto y se importa la función clear; además de las variables carrito, cantidad y precioFinal 
   const { carrito, cantidad, precioFinal, clear } = UsarContextos();
   
+  //Hook para navegar a otra ruta
   const navigate = useNavigate();
 
+  //Función que redirige a la ruta /form si la variable 'carrito' está con productos
   const formulario = (e) => {
     carrito.length ? navigate('/form') : e.target.disabled=true;
   }

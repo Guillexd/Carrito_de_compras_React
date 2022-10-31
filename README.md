@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Carrito de compras
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción
+Este es un carrito de compras hecho en React.
 
-## Available Scripts
+## Librerías adicionales usadas
+>Todo el sitio web fue maquetado con **Boostrap**, se puso el cdn directamente en `index.html`, por lo que se hará mucho uso de las clases *className* y *style* en jsx para la maquetación.
 
-In the project directory, you can run:
+>Se usó e importó **react-router-dom** para la gestión de rutas.
 
-### `npm start`
+>Se usó e importó **firebase/firestore** para hacer CRUD a la base de datos 'coleccion-firebase' en la plataforma firebase.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Hooks usados
+- useState
+- useEffect
+- useParams
+- useNavigate
+- createContext
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Utils
+### `CartContext`
+> Se crea el contexto donde se pasarán las funciones y estados para el sitio web.\
+Se exporta la función 'usarContextos' para hacer el llamado y uso del contexto en cualquier parte.
 
-### `npm test`
+> Se hace uso de useState (**carrito**, **setCarrito**) para guardar el estado de los detalles de los productos almacenados.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Se hace uso de useState (**cantidad**, **setCantidad**) para guardar el estado de la cantidad de productos pedidos en total.
 
-### `npm run build`
+> Se hace uso de useState (**precioFinal**, **setPrecioFinal**) para guardar el estado del precio total de los productos pedidos en total.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+>Se hace uso de useEffect para hacer el seguimiento de **"carrito"** y controlar el estado de **"cantidad"** y **"precioFinal"**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `Firebase`
+> Se importó varias funciones `{ getFirestore, doc, getDoc, collection, getDocs, query, where, addDoc, updateDoc }` para la manipulación de la base de datos a través de funciones.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **getListaTotal:** Devuelve toda la colección 'coleccion-firebase' de la base de datos.
+- **getProducto:** Devuelve el documento especificado de la colección 'coleccion-firebase' de la base de datos.
+- **getListaFiltrada:** Devuelve parte de la colección 'coleccion-firebase' de la base de datos.
+- **addOrder:** Registra en una nueva colección 'orders' los productos seleccinados.
+- **updateStock** Actualiza el stock de cada producto de la colección 'coleccion-firebase' 
 
-### `npm run eject`
+## Components
+### `App`
+Retorna la navegación (*Routes y Route*) y contextos (*useContext*) de la página.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `NavBar`
+Retorna la barra de navegación para la presentación de las páginas, te puede redirigir a la ruta */categorias/:id* y se importa el componente **CartWidget**.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `CartWidget`
+Retorna un logo y la cantidad de productos en el **"carrito"** gracias a **"cantidad"**. Además, te redirige a la ruta *carrito* al hacer click sobre el logo.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `NotFound`
+Retorna un mensaje de que la página no fue encontrada debido a que la ruta no existe.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### `ItemListContainer`
+Retorna el titulo de la categoria seleccionada o la por defecto, y se renderiza condicionalmente, a la espera de recibir la información de la bse de datos 'coleccion-firebase' de la plataforma firebase, **ItemList**.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `ItemList`
+Retorna el contenedor de un producto e importa el componente **Item** simultánea y repetidamente.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `Item`
+Retorna el/los producto(s) con algunos de sus detalles, haciendo click en la imagen o en el boton te redigirá a una nueva ruta */item/:id*.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `ItemDetailContainer`
+Retorna el producto seleccionado en **Item** y se renderiza condicionalmente, a la espera de recibir la información la base de datos 'coleccion-firebase' de la plataforma firebase, **ItemDetail**.
 
-### Analyzing the Bundle Size
+### `ItemDetail`
+Retorna el producto detallado y se importa **ItemCount**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `ItemCount`
+Retorna los botones de control de las cantidades de producto y de agregar el producto al "carrito".
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `CartContainer`
+Retorna el contenedor de los productos añadidos al **"carrito"**; la tabla de información de **"cantidad"**, **"precioFinal"**; un botón que te redirige a la ruta */carrito*  y se importa **Cart** simultánea y repetidamente.
 
-### Advanced Configuration
+### `Cart`
+Retorna el/los producto(s) añadido(s) al **"carrito"** con un boton para poder eliminar el producto de "carrito".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `Form`
+Retorna un formulario y la tabla de información de **"cantidad"**, **"precioFinal"** junto a un botón que añadirá esa petición en forma de array de objetos a la plataforma firebase.
